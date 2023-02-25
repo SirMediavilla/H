@@ -38,7 +38,7 @@ if(isset($_REQUEST['submit'])){
 	<div id="logo"></div>
 
 	<div id="login-block">
-		<h3>Enter Details</h3>
+		<h3>LOGIN</h3>
 		<form method="POST" action="" name="login">
 		<div>
 			<input type="email" class="input" required name="useremail" placeholder="Enter email"/>

@@ -5,6 +5,7 @@
             <label for="fname">Product Name</label>
             <input type="text" id="product_name" class="input" name="product_name" placeholder="Enter product name...">
         </div>
+        
         <div id="button-block">
         <input type="submit" value="Delete">
         </div>

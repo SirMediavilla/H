@@ -1,9 +1,9 @@
-<h3>Provide the Required Information</h3>
+<h3>User Details</h3>
 <div id="form-block">
 <form method="POST" action="processes/process.user.php?action=update">
         <div id="form-block-half">
             <label for="fname">First Name</label>
-            <input type="text" id="fname" class="input" name="firstname" value="<?php echo $user->get_user_firstname($id);?>" placeholder="Your name..">
+            <input type="text" id="fname" class="input" name="firstname" value="<?php echo $user->get_user_firstname($id);?>" placeholder="Your first name..">
 
             <label for="lname">Last Name</label>
             <input type="text" id="lname" class="input" name="lastname" value="<?php echo $user->get_user_lastname($id);?>" placeholder="Your last name..">

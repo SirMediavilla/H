@@ -7,7 +7,7 @@
         </div>
         </div>
         <div id="button-block">
-        <input type="submit" value="Delete">
+        <input type="delete" value="Delete">
         </div>
   </form>
 </div>

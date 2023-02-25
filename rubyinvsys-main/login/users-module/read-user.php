@@ -16,7 +16,7 @@ foreach($user->list_users() as $value){
 ?>
       <tr>
         <td><?php echo $count;?></td>
-        <td><a href="index.php?page=settings&subpage=users&action=profile&id=<?php echo $user_id;?>"><?php echo $user_lastname.', '.$user_firstname;?></a></td>
+        <td><a href="index.php?page=usersproducts&subpage=users&action=profile&id=<?php echo $user_id;?>"><?php echo $user_lastname.', '.$user_firstname;?></a></td>        
         <td><?php echo $user_access;?></td>
         <td><?php echo $user_email;?></td>
       </tr>

@@ -10,8 +10,8 @@
         $stmt = $conn->prepare("Insert into tbl_products(product_name, product_price) values(?, ?)");
         $stmt->bind_param("ss", $product_name, $product_price);
         $stmt->execute();
-        echo "Added Successfully";
         $stmt->close();
+        $previousURL = $DB_SERVER['http://localhost/rubyinvsys-main/login/index.php?page=usersproducts&subpage=products'];
         $conn->close();
     }
 ?>

@@ -9,17 +9,16 @@ class Product{
 		$this->conn = new PDO("mysql:host=".$this->DB_SERVER.";dbname=".$this->DB_DATABASE,$this->DB_USERNAME,$this->DB_PASSWORD);
 		
 	}
-	
-	public function new_product($email,$password,$lastname,$firstname, $access){
+	public function new_product($product_name, $product_price){
 		
 		/* Setting Timezone for DB */
 		$NOW = new DateTime('now', new DateTimeZone('Asia/Manila'));
 		$NOW = $NOW->format('Y-m-d H:i:s');
 
 		$data = [
-			[$lastname,$firstname,$email,$password,$NOW,$NOW,'1', $access],
+			[$name, $price],
 		];
-		$stmt = $this->conn->prepare("INSERT INTO tbl_users (user_lastname, user_firstname, user_email, user_password, user_date_added, user_time_added, user_status, user_access) VALUES (?,?,?,?,?,?,?,?)");
+		$stmt = $this->conn->prepare("INSERT INTO tbl_products (product_name, product_price) VALUES (?,?)");
 		try {
 			$this->conn->beginTransaction();
 			foreach ($data as $row)
@@ -36,21 +35,21 @@ class Product{
 
 	}
 
-	public function update_user($lastname,$firstname, $access, $id){
+	public function update_product($product_id, $product_name, $product_price){
 		
 		/* Setting Timezone for DB */
 		$NOW = new DateTime('now', new DateTimeZone('Asia/Manila'));
 		$NOW = $NOW->format('Y-m-d H:i:s');
 
-		$sql = "UPDATE tbl_users SET user_firstname=:user_firstname,user_lastname=:user_lastname,user_date_updated=:user_date_updated,user_time_updated=:user_time_updated,user_access=:user_access WHERE user_id=:user_id";
+		$sql = "UPDATE tbl_products SET product_name=:product_name, product_price=:product_price WHERE product_id=:product_id";
 
 		$q = $this->conn->prepare($sql);
-		$q->execute(array(':user_firstname'=>$firstname, ':user_lastname'=>$lastname,':user_date_updated'=>$NOW,':user_time_updated'=>$NOW,':user_access'=>$access,':user_id'=>$id));
+		$q->execute(array(':product_name'=>$product_name, ':product_price'=>$product_price, ':product_id'=>$product_id));
 		return true;
 	}
 
-	public function list_users(){
-		$sql="SELECT * FROM tbl_users";
+	public function list_products(){
+		$sql="SELECT * FROM tbl_products";
 		$q = $this->conn->query($sql) or die("failed!");
 		while($r = $q->fetch(PDO::FETCH_ASSOC)){
 		$data[]=$r;
@@ -62,71 +61,26 @@ class Product{
 		}
 }
 
-	function get_user_id($email){
-		$sql="SELECT user_id FROM tbl_users WHERE user_email = :email";	
+	function get_product_id($product_name){
+		$sql="SELECT product_id FROM tbl_products WHERE product_id = :id";	
 		$q = $this->conn->prepare($sql);
-		$q->execute(['email' => $email]);
-		$user_id = $q->fetchColumn();
-		return $user_id;
+		$q->execute(['id' => $product_id]);
+		$product_id = $q->fetchColumn();
+		return $product_id;
 	}
-	function get_user_email($id){
-		$sql="SELECT user_email FROM tbl_users WHERE user_id = :id";	
+	function get_product_name($product_id){
+		$sql="SELECT product_name FROM tbl_products WHERE product_id = :id";	
 		$q = $this->conn->prepare($sql);
-		$q->execute(['id' => $id]);
-		$user_email = $q->fetchColumn();
-		return $user_email;
+		$q->execute(['id' => $product_id]);
+		$product_name = $q->fetchColumn();
+		return $product_name;
 	}
-	function get_user_firstname($id){
-		$sql="SELECT user_firstname FROM tbl_users WHERE user_id = :id";	
+	function get_product_price($product_id){
+		$sql="SELECT product_price FROM tbl_products WHERE product_id = :id";		
 		$q = $this->conn->prepare($sql);
-		$q->execute(['id' => $id]);
-		$user_firstname = $q->fetchColumn();
-		return $user_firstname;
+		$q->execute(['id' => $product_id]);
+		$product_price = $q->fetchColumn();
+		return $product_price;
 	}
-	function get_user_lastname($id){
-		$sql="SELECT user_lastname FROM tbl_users WHERE user_id = :id";	
-		$q = $this->conn->prepare($sql);
-		$q->execute(['id' => $id]);
-		$user_lastname = $q->fetchColumn();
-		return $user_lastname;
-	}
-	function get_user_access($id){
-		$sql="SELECT user_access FROM tbl_users WHERE user_id = :id";	
-		$q = $this->conn->prepare($sql);
-		$q->execute(['id' => $id]);
-		$user_access = $q->fetchColumn();
-		return $user_access;
-	}
-	function get_user_status($id){
-		$sql="SELECT user_status FROM tbl_users WHERE user_id = :id";	
-		$q = $this->conn->prepare($sql);
-		$q->execute(['id' => $id]);
-		$user_status = $q->fetchColumn();
-		return $user_status;
-	}
-	function get_session(){
-		if(isset($_SESSION['login']) && $_SESSION['login'] == true){
-			return true;
-		}else{
-			return false;
-		}
-	}
-	public function check_login($email,$password){
-		
-		$sql = "SELECT count(*) FROM tbl_users WHERE user_email = :email AND user_password = :password"; 
-		$q = $this->conn->prepare($sql);
-		$q->execute(['email' => $email,'password' => $password ]);
-		$number_of_rows = $q->fetchColumn();
-		
 
-	
-		if($number_of_rows == 1){
-			
-			$_SESSION['login']=true;
-			$_SESSION['user_email']=$email;
-			return true;
-		}else{
-			return false;
-		}
-	}
 }

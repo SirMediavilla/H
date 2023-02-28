@@ -1,6 +1,5 @@
 <div id="third-submenu">
-    <a href="index.php?page=usersproducts&subpage=users">List Users</a> 
-    | <a href="index.php?page=usersproducts&subpage=users&action=create">Create User</a> 
+    <a href="index.php?page=usersproducts&subpage=users">List Users</a> | <a href="index.php?page=usersproducts&subpage=users&action=create">Create User</a> 
 </div>
 <div id="subcontent">
     <?php

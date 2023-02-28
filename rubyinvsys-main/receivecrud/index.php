@@ -8,7 +8,6 @@ $page = (isset($_GET['page']) && $_GET['page'] != '') ? $_GET['page'] : '';
 $subpage = (isset($_GET['subpage']) && $_GET['subpage'] != '') ? $_GET['subpage'] : '';
 $action = (isset($_GET['action']) && $_GET['action'] != '') ? $_GET['action'] : '';
 $id = (isset($_GET['id']) && $_GET['id'] != '') ? $_GET['id'] : '';
-$product_id = (isset($_GET['product_id']) && $_GET['product_id'] != '') ? $_GET['product_id'] : '';
 
 $product = new Product();
 $user = new User();
@@ -28,6 +27,7 @@ $user_id = $user->get_user_id($_SESSION['user_email']);
         <a href="index.php?page=productinv">Products Inventory</a>
         <a href="index.php?page=orders">Orders</a>
         <a href="index.php?page=ordersitems">Orders Items</a>
+        <a href="logout.php" class="move-right">Log Out</a> 
     </div>
 
     <title>Ruby's' Bread and Pastries House</title>
@@ -43,14 +43,6 @@ $user_id = $user->get_user_id($_SESSION['user_email']);
         <div id="name">
             <?php echo $user->get_user_lastname($user_id).', '.$user->get_user_firstname($user_id);?>
         </div>
-
-        <form action="logout.php">
-            
-            <div id="button-center">
-            <input type="submit" value="Logout">
-            </div>
-        </form>
-       
     </div>
 
 

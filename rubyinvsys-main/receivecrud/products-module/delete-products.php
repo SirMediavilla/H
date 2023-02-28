@@ -1,9 +1,9 @@
 <h3>Which Product to Delete?</h3>
 <div id="form-block">
-    <form method="POST" action="processes/process.products.php?action=delete">
+    <form method="POST" action="products-module/create-2.php">
         <div id="form-block-half">
             <label for="fname">Product Name</label>
-            <input type="hidden" id="product_id" class="input" name="product_id" value="<?php echo $id;?>">
+            <input type="text" id="product_name" class="input" name="product_name" placeholder="Enter product name...">
         </div>
         
         <div id="button-block">

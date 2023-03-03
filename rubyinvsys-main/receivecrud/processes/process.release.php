@@ -29,9 +29,9 @@ function create_new_transaction(){
 function new_release_item(){
 	$release = new Release();
     $relid= $_POST['relid'];
-    $prodid= $_POST['prodid']; 
+    $prodid= $_POST['product_id']; 
     $qty= $_POST['qty']; 
-    $rid = $release->new_release_item($relid, $prodid, $qty);
+    $rid = $release->new_release_item($relid, $product_id, $qty);
     if($rid){
         header('location: ../index.php?page=release&action=release&id='.$relid);
     }

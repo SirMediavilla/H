@@ -38,17 +38,6 @@ class Receive{
 	
 		}
 
-	public function list_product_type(){
-		$sql="SELECT * FROM tbl_type";
-		$q = $this->conn->query($sql) or die("failed!");
-		while($r = $q->fetch(PDO::FETCH_ASSOC)){
-		$data[]=$r;
-		}
-		if(empty($data)){
-		   return false;
-		}else{
-			return $data;	
-		}
 	}
 	public function list_receive(){
 		$sql="SELECT * FROM tbl_receive";
@@ -104,7 +93,7 @@ class Receive{
 		}
 	}
 
-	public function new_receive_item($recid,$prodid,$qty){
+	public function new_receive_item($recid,$product_id,$qty){
 		/* Setting Timezone for DB */
 		$NOW = new DateTime('now', new DateTimeZone('Asia/Manila'));
 		$NOW = $NOW->format('Y-m-d H:i:s');

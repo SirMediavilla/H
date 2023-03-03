@@ -9,16 +9,16 @@ class Product{
 		$this->conn = new PDO("mysql:host=".$this->DB_SERVER.";dbname=".$this->DB_DATABASE,$this->DB_USERNAME,$this->DB_PASSWORD);
 		
 	}
-	public function new_product($productname, $productprice){
+	public function new_product($productname, $producttype, $productprice){
 		
 		/* Setting Timezone for DB */
 		$NOW = new DateTime('now', new DateTimeZone('Asia/Manila'));
 		$NOW = $NOW->format('Y-m-d H:i:s');
 
 		$data = [
-			[$productname, $productprice],
+			[$productname, $producttype, $productprice],
 		];
-		$stmt = $this->conn->prepare("INSERT INTO tbl_products (product_name, product_price) VALUES (?,?)");
+		$stmt = $this->conn->prepare("INSERT INTO tbl_products (product_name, product_type, product_price) VALUES (?,?,?)");
 		try {
 			$this->conn->beginTransaction();
 			foreach ($data as $row)
@@ -35,16 +35,16 @@ class Product{
 
 	}
 
-	public function update_product($productname, $productprice, $id){
+	public function update_product($productname, $producttype, $productprice, $id){
 		
 		/* Setting Timezone for DB */
 		$NOW = new DateTime('now', new DateTimeZone('Asia/Manila'));
 		$NOW = $NOW->format('Y-m-d H:i:s');
 
-		$sql = "UPDATE tbl_products SET product_name=:product_name, product_price=:product_price WHERE product_id=:product_id";
+		$sql = "UPDATE tbl_products SET product_name=:product_name, product_type=:product_type, product_price=:product_price WHERE product_id=:product_id";
 
 		$q = $this->conn->prepare($sql);
-		$q->execute(array(':product_name'=>$productname, ':product_price'=>$productprice, ':product_id'=>$id));
+		$q->execute(array(':product_name'=>$productname, ':product_type'=>$producttype, ':product_price'=>$productprice, ':product_id'=>$id));
 		return true;
 	}
 
@@ -61,9 +61,10 @@ class Product{
 		}
 	}
 
-	public function delete_product($id){
+	public function delete_product(){
 		
-		$sql= "DELETE * FROM tbl_products WHERE product_id = :id";
+		$sql= "DELETE FROM tbl_products (product_type, product_name, product_price) WHERE product_id = :id";
+		$q = $this->conn->prepare($sql);
 		return true;
 	}
 
@@ -81,6 +82,15 @@ class Product{
 		$product_name = $q->fetchColumn();
 		return $product_name;
 	}
+
+	function get_product_type($id){
+		$sql="SELECT product_type FROM tbl_products WHERE product_id = :id";		
+		$q = $this->conn->prepare($sql);
+		$q->execute(['id' => $id]);
+		$product_type = $q->fetchColumn();
+		return $product_type;
+	}
+
 	function get_product_price($id){
 		$sql="SELECT product_price FROM tbl_products WHERE product_id = :id";		
 		$q = $this->conn->prepare($sql);

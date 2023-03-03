@@ -29,9 +29,9 @@ function create_new_transaction(){
 function new_receive_item(){
 	$receive = new Receive();
     $recid= $_POST['recid'];
-    $prodid= $_POST['prodid']; 
+    $prodid= $_POST['product_id']; 
     $qty= $_POST['qty']; 
-    $rid = $receive->new_receive_item($recid, $prodid, $qty);
+    $rid = $receive->new_receive_item($recid, $product_id, $qty);
     if($rid){
         header('location: ../index.php?page=receive&action=receive&id='.$recid);
     }

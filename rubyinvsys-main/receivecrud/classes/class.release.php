@@ -93,7 +93,7 @@ class Release{
 		}
 	}
 
-	public function new_release_item($relid,$prodid,$qty){
+	public function new_release_item($relid,$product_id,$qty){
 		/* Setting Timezone for DB */
 		$NOW = new DateTime('now', new DateTimeZone('Asia/Manila'));
 		$NOW = $NOW->format('Y-m-d H:i:s');
@@ -141,7 +141,7 @@ class Release{
 			$this->conn->beginTransaction();
 			foreach ($data as $row){
 				extract($row);
-				$stmt->execute(array($rel_id,$prod_id,$rel_qty));
+				$stmt->execute(array($rel_id,$product_id,$rel_qty));
 			}
 			//$id= $this->conn->lastInsertId();
 			$this->conn->commit();

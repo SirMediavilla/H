@@ -20,7 +20,8 @@ DROP TABLE IF EXISTS `tbl_products`;
 CREATE TABLE `tbl_products` (
   `product_id` int(180) unsigned NOT NULL auto_increment, 
   `product_name` varchar(180) NOT NULL default '', 
-  `product_price`varchar(180) NOT NULL default '', 
+  `product_type` varchar(180) NOT NULL default '', 
+  `product_price` int(180) NOT NULL, 
   PRIMARY KEY  (`product_id`) 
 );
 

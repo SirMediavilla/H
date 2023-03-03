@@ -6,6 +6,11 @@
             <label for="product_name">Product Name</label>
             <input type="text" id="product_name" class="input" name="product_name" value="<?php echo $product->get_product_name($id);?>" placeholder="Name of product..">
 
+            <label for="product_price">Product Type</label>
+            <select id="type" name="type">
+              <option value="bread" <?php if($product->get_product_type($id) == "bread"){ echo "selected";};?>>Bread</option>
+            </select>
+
             <label for="product_price">Product Price</label>
             <input type="text" id="product_price" class="input" name="product_price" value="<?php echo $product->get_product_price($id);?>" placeholder="Price of product..">
 

@@ -18,11 +18,12 @@ switch($action){
 function create_new_product(){
 	$product = new Product();
     $productname = ucwords($_POST['product_name']);
+    $producttype = ucwords($_POST['product_type']);
     $productprice = ucwords($_POST['product_price']);
     
-    $result = $product->new_product($productname, $productprice, $id);
+    $result = $product->new_product($productname, $producttype, $productprice);
     if($result){
-        header('location: ../index.php?page=products&subpage=products&action=profile&id='.$id);
+        header('location: ../index.php?page=usersproducts&subpage=products&action=profile&id='.$id);
     }
 }
 
@@ -30,11 +31,12 @@ function update_product(){
 	$product = new Product();
     $productid = $_POST['product_id'];
     $productname = ucwords($_POST['product_name']);
+    $producttype = ucwords($_POST['product_type']);
     $productprice = ucwords($_POST['product_price']);
    
-    $result = $product->update_product($productname, $productprice, $productid);
+    $result = $product->update_product($productname, $producttype, $productprice, $productid);
     if($result){
-        header('location: ../index.php?page=products&subpage=products&action=profile&id='.$productid);
+        header('location: ../index.php?page=usersproducts&subpage=products&action=profile&id='.$productid);
     }
 }
 
@@ -43,6 +45,6 @@ function delete_product(){
     $productid = $_POST['product_id']; 
     $result = $product->delete_product($productid);
     if($result){
-        header('location: ../index.php?page=products&subpage=products&action=profile&id='.$productid);
+        header('location: ../index.php?page=usersproducts&subpage=products&action=profile&id='.$productid);
     }
 }
